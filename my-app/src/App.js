@@ -1,12 +1,11 @@
 // import logo from './logo.svg';
 // import './App.css';
 import React, { useState, useEffect } from 'react'
-// import User from '../Components/User'
-//import Form from '../components/UserForm.js'
+import User from './Components/User'
+import UserForm from './Components/UserForm'
 //import Schema from '../components/UserSchema'
 import axios from 'axios'
 import * as yup from 'yup'
-import Friend from './Components/User';
 
 const initialFormValues = {
   ///// TEXT INPUTS /////
