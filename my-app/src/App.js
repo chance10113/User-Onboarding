@@ -8,10 +8,12 @@ import axios from 'axios'
 import * as yup from 'yup'
 
 const initialFormValues = {
-  ///// TEXT INPUTS /////
+  //Text 
   username: "",
   email: "",
   password:"",
+  //Check
+  termsOfService: false,
 };
 const initialFormErrors = {
   username: "",
@@ -33,6 +35,15 @@ function App() {
 
   const getUsers = () => {
     //Need to do axios
+    axios
+    .get('https://reqres.in/api/users', newUser)
+    .then((res) => {
+      setUsers([res.data, ...users]);
+      setFormValues(initialFormValues);
+    })
+    .catch((error) => {
+      console.log("GetUsers Broke!", error);
+    });
   };
 
   const postNewUser = (newUser) => {
