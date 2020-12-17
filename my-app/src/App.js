@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import User from './Components/User'
 import UserForm from './Components/UserForm'
-import Schema from './Components/UserSchema'
+import schema from './Components/UserSchema'
 import axios from 'axios'
 import * as yup from 'yup'
 
@@ -39,9 +39,7 @@ function App() {
     axios
     .get('https://reqres.in/api/users')
     .then((res) => {
-      setUsers([res.data]);
-      console.log('https://reqres.in/api/users')
-      console.log(res.data)
+      setUsers(res.data.data);
     })
     .catch((error) => {
       console.log("GetUsers Broke!", error);
@@ -49,11 +47,15 @@ function App() {
   };
 
   const postNewUser = (newUser) => {
-     axios
-     .get('https://reqres.in/api/users', newUser)
+    console.log(newUser) 
+    axios
+     .post('https://reqres.in/api/users', newUser)
      .then((res) =>{
-       setUsers(res.data, ...users);
+        setUsers([res.data, ...users]);
        setFormValues(initialFormValues);
+       console.log('Post getBack?', users)
+       console.log("Response",res.data)
+       console.log("setUsers", [res.data, ...users])
      })
      .catch((error) => {
       console.log("postNewUserBroke", error)
@@ -64,7 +66,7 @@ function App() {
 
   const inputChange = (name, value) => {
     yup
-    .reach(Schema, name) 
+    .reach(schema, name) 
     .validate(value)
     .then(() => {
       setFormErrors({
@@ -77,6 +79,10 @@ function App() {
         ...formErrors,
         [name]:error.errors,
     })
+  })
+  setFormValues({
+    ...formValues,
+    [name]: value
   })
 }
   
@@ -101,7 +107,7 @@ function App() {
   useEffect(() => {
     //SCHEMA STUFF GOES HERE!!! BETTER WRITE IT!!
     //also some SetDisabled stuff too
-    Schema.isValid(formValues)
+    schema.isValid(formValues)
     .then((valid) => {
       setDisabled(!valid)
     })
@@ -124,6 +130,7 @@ function App() {
        
 
          {users.map((user) => {
+
            return <User key={user.id} details={user} />
          } )}
     </div>
