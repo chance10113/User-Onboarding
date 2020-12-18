@@ -19,10 +19,10 @@ export default function UserForm(props) {
       <div className="UserForm-group submit div">
         <h2> Add a User!</h2>
 
-        <button disabled={disabled}>Submit</button>
+        <button id="submitButton" disabled={disabled}>Submit</button>
 
         <div className="Errors">
-          <div>{errors.username}</div>
+          <div>{errors.first_name}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
           <div>{errors.termsOfService}</div>
@@ -31,11 +31,11 @@ export default function UserForm(props) {
         <div className="UserForm-group inputs">
           <h4> Enter Login </h4>
           <label>
-            Username
+            first_name
             <input
-              value={values.username}
+              value={values.first_name}
               onChange={onChange}
-              name="username"
+              name="first_name"
               type="text"
             />
           </label>
