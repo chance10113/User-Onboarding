@@ -21,7 +21,8 @@ export default function Form(props) {
         <button disabled={disabled}>Submit</button>
         <div className="errors">
           {/* VALIDATION ERRORS */}
-          <div>{errors.username}</div>
+          <div>{errors.firstName}</div>
+          <div>{errors.lastName}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
           <div>{errors.tOS}</div>
