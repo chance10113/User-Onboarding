@@ -32,10 +32,20 @@ export default function Form(props) {
           {/* TEXT INPUTS */}
 
           <label>
-            Username
+            First Name
             <input
-              value={values.username}
-              name="username"
+              value={values.firstName}
+              name="firstName"
+              type="text"
+              onChange={onChange}
+            />
+          </label>
+
+          <label>
+            Last Name
+            <input
+              value={values.lastName}
+              name="lastName"
               type="text"
               onChange={onChange}
             />
