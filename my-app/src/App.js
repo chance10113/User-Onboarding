@@ -5,11 +5,11 @@ import axios from "axios";
 import * as yup from "yup";
 import Form from "./Components/Form.js";
 import schema from "./Validation/FormSchema.js";
-import user from "./Components/User.js";
+import User from "./Components/User.js";
 
 const initialFormValues = {
   //Text
-  firstName: "",
+  first_name: "",
   lastName: "",
   email: "",
   password: "",
@@ -18,7 +18,7 @@ const initialFormValues = {
 };
 
 const initialFormErrors = {
-  firstName: "",
+  first_name: "",
   lastName: "",
   email: "",
   password: "",
@@ -50,9 +50,9 @@ function App() {
 
   const postNewUser = (newUser) => {
     axios
-      .post("https://reqres.in/api/users")
+      .post("https://reqres.in/api/users", newUser)
       .then((res) => {
-        setUsers([res.data, ...users]);
+        setUsers([...users, res.data]);
         setFormValues(initialFormValues);
       })
       .catch((error) => {
@@ -63,9 +63,10 @@ function App() {
   //Event Handlers
 
   const inputChange = (name, value) => {
+    //debugger
     yup
-      .reach(schema, name)
-      .validate(value)
+       .reach(schema, name)
+       .validate(value)
       .then(() => {
         setFormErrors({
           ...formErrors,
@@ -87,13 +88,44 @@ function App() {
   const formSubmit = () => {
     const newUser = {
       first_name: formValues.first_name.trim(),
+      lastName: formValues.lastName.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     };
     postNewUser(newUser);
   };
 
-  
+  //Use Effects
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
+
+  return (
+    <section className= "U-I-container">
+      <header>
+        <h1> User List and Sign Up </h1>
+      </header>
+
+      <Form 
+          values={formValues}
+          change={inputChange}
+          submit={formSubmit}
+          disabled={disabled}
+          errors={formErrors}
+      />
+
+      {users.map((user) => {
+        return <User key={user.id} details={user} />
+      })}
+    </section>
+  )
 }
 
 export default App;

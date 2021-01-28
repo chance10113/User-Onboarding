@@ -17,5 +17,5 @@ export default yup.object().shape({
     .string()
     .required("Password is required")
     .min(6, "Password must be at least 6 chars long"),
-  tOS: yup.boolean,
+  tOS: yup.boolean(),
 });
