@@ -10,7 +10,7 @@ import User from "./Components/User.js";
 const initialFormValues = {
   //Text
   first_name: "",
-  lastName: "",
+  last_name: "",
   email: "",
   password: "",
   //Checkbox
@@ -19,7 +19,7 @@ const initialFormValues = {
 
 const initialFormErrors = {
   first_name: "",
-  lastName: "",
+  last_name: "",
   email: "",
   password: "",
   tOS: false,
@@ -88,7 +88,7 @@ function App() {
   const formSubmit = () => {
     const newUser = {
       first_name: formValues.first_name.trim(),
-      lastName: formValues.lastName.trim(),
+      last_name: formValues.last_name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     };

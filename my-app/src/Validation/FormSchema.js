@@ -1,11 +1,11 @@
 import * as yup from "yup";
 
 export default yup.object().shape({
-  firstName: yup
+  first_name: yup
     .string()
     .required("First Name is required")
     .min(2, "First Name must be at least 2 chars long"),
-  lastName: yup
+  last_name: yup
     .string()
     .required("Last Name is required")
     .min(2, "Last Name must be at least 2 chars long"),
